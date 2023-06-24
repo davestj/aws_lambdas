@@ -20,7 +20,7 @@ This script allows you to copy an EC2 AMI from one AWS account to another, while
 
 3. Execute the script using the following command:
    ```bash
-   python ami_copy_script.py <source_region> <destination_region> <destination_account_id>
+   python copy_ami.py <source_region> <destination_region> <destination_account_id>
    ```
    Make sure to provide the necessary command line arguments:
    - `<source_region>`: The region where the source AMI is located.
@@ -31,7 +31,7 @@ This script allows you to copy an EC2 AMI from one AWS account to another, while
 
 To copy an AMI from `us-west-2` to `eu-west-1` in the AWS account with ID `123456789012`, you would run the following command:
 ```bash
-python ami_copy_script.py us-west-2 eu-west-1 123456789012
+python copy_ami.py us-west-2 eu-west-1 123456789012
 ```
 
 ## License

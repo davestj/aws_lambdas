@@ -20,15 +20,7 @@ This Lambda function checks the expiration date of all hosted zones in AWS Route
    cd hosted-zone-expiration-checker
    ```
 
-3. Create a new Python file and paste the provided Lambda function code into it:
-
-   ```shell
-   touch lambda_function.py
-   ```
-
-   Open the `lambda_function.py` file and paste the Lambda function code.
-
-4. Save the file.
+3. Clone this repo and edit check_route53_zones.py to fit your setup
 
 ### 2. Package the Lambda Function
 
@@ -41,7 +33,7 @@ This Lambda function checks the expiration date of all hosted zones in AWS Route
 2. Create a deployment package by creating a ZIP archive:
 
    ```shell
-   zip -r function.zip lambda_function.py
+   zip -r function.zip check_route53_zones.py
    ```
 
 ### 3. Create the Lambda Function in AWS
@@ -63,7 +55,7 @@ This Lambda function checks the expiration date of all hosted zones in AWS Route
 
 ### 4. Configure the Email Settings
 
-1. Open the `lambda_function.py` file in a text editor.
+1. Open the `check_route53_zones.py` file in a text editor.
 
 2. Locate the `send_email` function and update the following variables:
 
