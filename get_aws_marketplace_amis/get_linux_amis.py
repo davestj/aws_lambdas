@@ -4,6 +4,10 @@ import sys
 import pandas as pd
 
 def list_free_linux_amis(name_pattern):
+    '''
+    :param name_pattern:
+    :return:
+    '''
     ec2_client = boto3.client('ec2')
 
     response = ec2_client.describe_images(

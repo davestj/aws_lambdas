@@ -3,6 +3,9 @@ import re
 import pandas as pd
 
 def list_free_linux_amis():
+    '''
+    :return: ami ids from marketplace in txt and spreadsheet formats
+    '''
     ec2_client = boto3.client('ec2')
 
     response = ec2_client.describe_images(
