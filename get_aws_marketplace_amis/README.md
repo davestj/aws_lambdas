@@ -1,5 +1,3 @@
-Sure! Here's a template for the README.md file for your AWS Lambda project "get_aws_marketplace_amis":
-
 # AWS Lambda Project: get_aws_marketplace_amis
 
 This project contains AWS Lambda functions written in Python to retrieve and list AWS Marketplace AMIs.
