@@ -3,6 +3,12 @@ import sys
 
 
 def copy_ami(source_region, destination_region, destination_account_id):
+    '''
+    :param source_region:
+    :param destination_region:
+    :param destination_account_id:
+    :return:
+    '''
     source_ami_id = 'ami-12345678'  # Replace with your source AMI ID
     kms_key_id = 'arn:aws:kms:us-east-1:123456789012:key/abcd1234-5678-90ab-cdef-1234567890ab'  # Replace with your KMS key ARN
 

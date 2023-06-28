@@ -1,3 +1,4 @@
+import argparse
 import whois
 import boto3
 from datetime import datetime, timedelta
@@ -5,6 +6,12 @@ import smtplib
 from email.mime.text import MIMEText
 
 def send_email(subject, body, recipient):
+    '''
+    :param subject:
+    :param body:
+    :param recipient:
+    :return:
+    '''
     sender = 'your_email@example.com'
     smtp_server = 'smtp.example.com'
     smtp_port = 587
@@ -26,7 +33,13 @@ def send_email(subject, body, recipient):
     except Exception as e:
         print(f"Failed to send expiration notice email: {str(e)}")
 
-def check_hosted_zones_expiration(event, context):
+def check_hosted_zones_expiration(event, context, recipient):
+    '''
+    :param event:
+    :param context:
+    :param recipient:
+    :return:
+    '''
     # Create Route 53 client
     route53 = boto3.client('route53')
 
@@ -47,7 +60,7 @@ def check_hosted_zones_expiration(event, context):
 
             # Check if the domain is registered and has an expiration date
             if w.status and w.expiration_date:
-                expiration_date = w.expiration_date
+                expiration_date = w.expiration_date[0]  # Access the first element of the list
 
                 # Calculate the remaining days until expiration
                 days_until_expiration = (expiration_date - datetime.now()).days
@@ -56,13 +69,11 @@ def check_hosted_zones_expiration(event, context):
                     # Domain is expired
                     subject = f"Domain Expiration Notice: {domain_name}"
                     body = f"The domain {domain_name} has expired."
-                    recipient = 'admin@example.com'
                     send_email(subject, body, recipient)
                 elif days_until_expiration <= 3:
                     # Domain is expiring within 3 days
                     subject = f"Domain Expiration Notice: {domain_name}"
                     body = f"The domain {domain_name} will expire in {days_until_expiration} days."
-                    recipient = 'admin@example.com'
                     send_email(subject, body, recipient)
                 else:
                     print(f"Domain: {domain_name}, Expiration Date: {expiration_date}")
@@ -78,3 +89,10 @@ def check_hosted_zones_expiration(event, context):
         'statusCode': 200,
         'body': 'Expiration date check completed'
     }
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Check expiration dates of hosted zones')
+    parser.add_argument('--recipient', required=True, help='Recipient email address')
+
+    args = parser.parse_args()
+    check_hosted_zones_expiration(None, None, args.recipient)
